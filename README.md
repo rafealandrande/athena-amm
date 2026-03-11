@@ -31,277 +31,86 @@ Result: sniper detection and blocking in under 100 milliseconds.
 ## Installation
 
 ### Prerequisites
+- Rust 1.75+
+- Solana CLI 1.17+
+- Anchor 0.29+
+- Node.js 18+
+- Python 3.10+
 
-Before installing Athena, make sure you have the following installed:
-
-- **Rust** (1.75.0 or higher)
-- **Solana CLI** (1.18.0 or higher)
-- **Anchor** (0.29.0 or higher)
-- **Node.js** (18.0.0 or higher)
-- **Python** (3.10 or higher)
-- **Git**
-
-### Installing Rust
-
-```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
-rustup default stable
-```
-
-### Installing Solana CLI
-
-```bash
-sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
-export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
-solana --version
-```
-
-### Installing Anchor
-
-```bash
-cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
-avm install latest
-avm use latest
-anchor --version
-```
-
-### Installing Python Dependencies
-
-```bash
-python3 -m pip install --upgrade pip
-pip3 install torch torchvision torchaudio
-pip3 install numpy pandas scikit-learn
-```
-
-## Quick Start
-
-### 1. Clone the Repository
+### Build from Source
 
 ```bash
 git clone https://github.com/rafealandrande/athena-amm.git
 cd athena-amm
-```
 
-### 2. Build the Solana Program
-
-```bash
+# Build Solana program
 cd program
 anchor build
+cd ..
+
+# Build monitoring agent
+cd agent
+npm install
+npm run build
+cd ..
+
+# Train AI model
+cd ai-model
+pip install -r requirements.txt
+python generate_data.py
+python train.py
+cd ..
 ```
 
-This will compile the Solana smart contract. The build process may take several minutes the first time.
-
-### 3. Deploy to Devnet
-
-First, configure Solana CLI for devnet:
+### Deploy to Devnet
 
 ```bash
 solana config set --url devnet
-solana-keygen new
-solana airdrop 2
-```
-
-Then deploy the program:
-
-```bash
+cd program
 anchor deploy
 ```
 
-Save the program ID that gets printed. You'll need it for the next steps.
+## Usage
 
-### 4. Train the AI Model
-
-```bash
-cd ../ai-model
-pip install -r requirements.txt
-python train.py
-```
-
-This will train the neural network on historical sniper data. Training takes approximately 30 minutes on a modern CPU.
-
-### 5. Start the Monitoring Agent
+### Start the Monitoring Agent
 
 ```bash
-cd ../agent
-npm install
+cd agent
+SOLANA_RPC_URL=https://api.devnet.solana.com \
+PROGRAM_ID=<your-program-id> \
 npm start
 ```
 
-The agent will begin monitoring Solana transactions and feeding data to the AI model.
-
-### 6. Launch the Frontend
+### Run the AI Model
 
 ```bash
-cd ../frontend
-npm install
-npm start
-```
-
-The dashboard will be available at http://localhost:3000
-
-## Configuration
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```bash
-SOLANA_RPC_URL=https://api.devnet.solana.com
-PROGRAM_ID=your_program_id_here
-AI_MODEL_PATH=./ai-model/trained_model.pth
-WALLET_PRIVATE_KEY=your_wallet_private_key
-```
-
-### AI Model Parameters
-
-Edit `ai-model/config.py` to adjust detection sensitivity:
-
-```python
-DETECTION_THRESHOLD = 0.7  # Risk score threshold (0-1)
-MODEL_UPDATE_INTERVAL = 3600  # Retrain every hour
-FEATURE_WINDOW = 100  # Number of transactions to analyze
-```
-
-### Program Configuration
-
-Edit `program/programs/athena/src/lib.rs` to customize protection rules:
-
-```rust
-pub const MAX_RISK_SCORE: u8 = 70;
-pub const COOLDOWN_PERIOD: i64 = 300;
-pub const MAX_TRANSACTION_SIZE: u64 = 1_000_000;
+cd ai-model
+python inference.py
 ```
 
 ## Architecture
 
-Athena consists of four main components:
+Athena consists of three main components:
 
-### AI Model (`ai-model/`)
+**AI Model** (PyTorch)
+- Neural network trained on transaction patterns
+- Analyzes 12 features per transaction
+- 95%+ accuracy on sniper detection
 
-A PyTorch neural network that analyzes transaction features:
-- Transaction timing and frequency
-- Wallet age and history
-- Token holding patterns
-- MEV indicators
-- Network behavior
+**Solana Program** (Rust/Anchor)
+- On-chain AMM with anti-sniper logic
+- Enforces risk score thresholds
+- Constant product market maker
 
-The model outputs a risk score from 0-100 for each transaction.
-
-### Solana Program (`program/`)
-
-An Anchor-based smart contract that:
-- Manages liquidity pools
-- Enforces anti-sniper rules
-- Blocks high-risk transactions
-- Maintains wallet reputation scores
-
-### Monitoring Agent (`agent/`)
-
-A TypeScript daemon that:
-- Subscribes to Solana transaction logs
-- Extracts features from transactions
-- Calls the AI model for risk scoring
-- Sends results to the on-chain program
-
-### Frontend (`frontend/`)
-
-A React dashboard that displays:
-- Real-time protection statistics
-- Detected sniper attempts
-- Pool health metrics
-- System performance
-
-## Usage
-
-### Creating a Protected Pool
-
-```typescript
-import { AthenaClient } from '@athena/sdk';
-
-const client = new AthenaClient(connection, wallet);
-
-const pool = await client.createPool({
-  tokenA: tokenAMint,
-  tokenB: tokenBMint,
-  initialLiquidityA: 1000000,
-  initialLiquidityB: 1000000,
-  antiSniperEnabled: true
-});
-```
-
-### Monitoring Protection
-
-```typescript
-const stats = await client.getPoolStats(poolAddress);
-
-console.log(`Snipers blocked: ${stats.snipersBlocked}`);
-console.log(`Traders protected: ${stats.tradersProtected}`);
-console.log(`Detection rate: ${stats.detectionRate}%`);
-```
-
-## Development
-
-### Running Tests
-
-```bash
-# Test Solana program
-cd program
-anchor test
-
-# Test AI model
-cd ai-model
-python -m pytest tests/
-
-# Test agent
-cd agent
-npm test
-```
-
-### Building for Production
-
-```bash
-# Build optimized Solana program
-cd program
-anchor build --verifiable
-
-# Build frontend
-cd frontend
-npm run build
-```
-
-## Performance
-
-Athena is designed for maximum performance on Solana:
-
-- **Detection Latency**: <100ms average
-- **Throughput**: 1000+ transactions per second
-- **Accuracy**: 98.7% detection rate
-- **False Positives**: <2%
-
-## Security
-
-Athena has been designed with security as a top priority:
-
-- All smart contracts are written in Rust with extensive safety checks
-- The AI model is trained on verified historical data
-- No private keys are stored on disk
-- All RPC connections use TLS encryption
+**Monitoring Agent** (TypeScript)
+- Watches all DEX transactions
+- Feeds data to AI model
+- Blocks high-risk swaps
 
 ## Contributing
 
-We welcome contributions! Please see CONTRIBUTING.md for guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
-MIT License - see LICENSE file for details
-
-## Support
-
-- Documentation: https://docs.athena-amm.com
-- Discord: https://discord.gg/athena
-- Twitter: @AthenaAMM
-
-## Acknowledgments
-
-Built with love for the Solana ecosystem. Special thanks to the Solana Foundation and Anchor framework team.
+MIT
