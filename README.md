@@ -4,33 +4,29 @@
   <img src="./assets/athena.png" width="300" alt="Athena"/>
 </div>
 
-AI-powered anti-sniper AMM for Solana. Protects traders from bot exploitation during token launches using real-time machine learning detection.
+Athena is the first AI agent market maker built for Solana. She detects and blocks sniper bots in real-time, protecting traders during token launches.
 
 ## Overview
 
-Athena is a next-generation automated market maker designed specifically for Solana that uses artificial intelligence to detect and block sniper bots in real-time. Built to leverage Solana's 400ms block times, Athena can identify malicious trading patterns and prevent exploitation before it happens.
+Token launches get destroyed by sniper bots. These automated programs buy massive amounts in the first block, front-run legitimate traders, and dump immediately. Athena stops them.
+
+She uses machine learning to analyze every transaction in under 100ms. When she spots a sniper, the on-chain program blocks them automatically. Built on Solana's 400ms blocks, she's faster than any bot.
 
 ### The Problem
 
-Token launches on decentralized exchanges face a critical problem: sniper bots. These automated programs exploit new token launches by:
+Token launches on DEXs face a critical issue: sniper bots. These programs exploit new launches by buying massive amounts in the first block, using MEV to front-run traders, and dumping immediately. This destroys price discovery and makes fair launches impossible.
 
-- Buying massive amounts in the first block before regular traders can react
-- Using MEV (Maximal Extractable Value) techniques to front-run legitimate transactions
-- Immediately dumping tokens after purchase, destroying price discovery
-- Making fair token launches nearly impossible for projects
-- Causing legitimate traders to lose money consistently
-
-Traditional AMMs have no defense against these attacks. They treat all transactions equally, allowing bots with superior infrastructure to dominate every launch.
+Traditional AMMs treat all transactions equally. They have no defense against bots with superior infrastructure.
 
 ### The Solution
 
-Athena solves this by combining three key technologies:
+Athena combines three technologies to stop snipers:
 
-1. **AI Detection Engine**: A neural network trained on thousands of historical sniper transactions that can identify bot behavior patterns in real-time
-2. **On-Chain Enforcement**: A Solana program that enforces protection rules directly on the blockchain
-3. **Autonomous Monitoring**: An agent that watches all DEX activity 24/7 and feeds data to the AI model
+1. AI Detection Engine: A neural network trained on thousands of sniper transactions that identifies bot behavior in real-time
+2. On-Chain Enforcement: A Solana program that blocks high-risk transactions automatically
+3. Autonomous Monitoring: An agent that watches DEX activity 24/7 and feeds data to the AI
 
-The result is a market maker that can detect and block sniper bots in under 100 milliseconds, faster than any bot can execute a trade.
+Result: sniper detection and blocking in under 100 milliseconds.
 
 ## Installation
 
