@@ -1,7 +1,7 @@
 # ATHENA
 
 <div align="center">
-  <img src="./assets/athena.jpg" width="300" alt="Athena"/>
+  <img src="./assets/athena.png" width="300" alt="Athena"/>
 </div>
 
 AI-powered anti-sniper AMM for Solana. Protects traders from bot exploitation during token launches using real-time machine learning detection.
