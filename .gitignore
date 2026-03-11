@@ -1,0 +1,11 @@
+node_modules/
+target/
+.env
+*.pyc
+__pycache__/
+.DS_Store
+dist/
+build/
+.anchor/
+test-ledger/
+*.log
