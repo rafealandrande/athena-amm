@@ -1,18 +1,16 @@
 <div align="center">
 
-![Athena Banner](./assets/banner.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/hero-dark.svg">
+  <img alt="Athena - AI Anti-Sniper Protocol" src="./assets/hero-dark.svg">
+</picture>
 
 AI-powered anti-sniper market maker for Solana. Protects traders from bot exploitation during token launches.
-
-<img src="./assets/athena.jpg" width="400" alt="Athena"/>
 
 ![Stats](./assets/stats.svg)
 
 </div>
-
-## What It Does
-
-Athena detects and blocks sniper bots in real-time using AI pattern recognition. Built on Solana's 400ms blocks to react faster than any bot.
 
 ## Features
 

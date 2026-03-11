@@ -1,0 +1,60 @@
+<svg width="1200" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="purple1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1">
+        <animate attributeName="stop-color" values="#8B5CF6;#A78BFA;#8B5CF6" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#C084FC;stop-opacity:1">
+        <animate attributeName="stop-color" values="#C084FC;#DDD6FE;#C084FC" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#9333EA;stop-opacity:1">
+        <animate attributeName="stop-color" values="#9333EA;#A855F7;#9333EA" dur="4s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <filter id="megaGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <radialGradient id="bgGrad">
+      <stop offset="0%" style="stop-color:#1a0033;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1"/>
+    </radialGradient>
+  </defs>
+  
+  <rect width="1200" height="600" fill="url(#bgGrad)"/>
+  
+  <g opacity="0.15">
+    <circle cx="200" cy="150" r="150" fill="#8B5CF6">
+      <animate attributeName="r" values="150;180;150" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.2;0.1" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1000" cy="450" r="200" fill="#9333EA">
+      <animate attributeName="r" values="200;230;200" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.2;0.1" dur="10s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <image href="./athena.jpg" x="50" y="150" width="400" height="400" opacity="0.85" preserveAspectRatio="xMidYMid slice">
+    <animate attributeName="opacity" values="0.8;0.9;0.8" dur="4s" repeatCount="indefinite"/>
+  </image>
+  
+  <text x="700" y="250" font-family="Arial, sans-serif" font-size="120" font-weight="900" 
+        fill="url(#purple1)" text-anchor="middle" filter="url(#megaGlow)">
+    ATHENA
+    <animateTransform attributeName="transform" type="scale" 
+      values="1;1.02;1" dur="3s" repeatCount="indefinite" additive="sum"/>
+  </text>
+  
+  <text x="700" y="320" font-family="Arial, sans-serif" font-size="28" 
+        fill="#C084FC" opacity="0.9" text-anchor="middle" letter-spacing="3">
+    AI ANTI-SNIPER PROTOCOL
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+  </text>
+  
+</svg>
