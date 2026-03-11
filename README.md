@@ -1,4 +1,4 @@
-# ATHENA
+# Athena
 
 <div align="center">
   <img src="./assets/athena.png" width="300" alt="Athena"/>
