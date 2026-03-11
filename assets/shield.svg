@@ -1,43 +1,54 @@
-<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+<svg width="900" height="700" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#9945FF;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#14F195;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:1" />
+    <linearGradient id="shieldPurple" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#A78BFA;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#C084FC;stop-opacity:1"/>
     </linearGradient>
-    <filter id="shieldGlow">
-      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+    <filter id="shieldMegaGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
       <feMerge>
+        <feMergeNode in="coloredBlur"/>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+    <radialGradient id="shieldBg">
+      <stop offset="0%" style="stop-color:#1a0033;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1"/>
+    </radialGradient>
   </defs>
   
-  <rect width="800" height="600" fill="#0a0a0a"/>
+  <rect width="900" height="700" fill="url(#shieldBg)"/>
   
-  <path d="M 400 100 L 500 200 L 500 400 L 400 500 L 300 400 L 300 200 Z" 
-        fill="url(#shieldGrad)" opacity="0.15" stroke="url(#shieldGrad)" stroke-width="3" filter="url(#shieldGlow)">
-    <animate attributeName="opacity" values="0.1;0.2;0.1" dur="4s" repeatCount="indefinite"/>
-  </path>
+  <g transform="translate(450, 350)">
+    <path d="M 0 -180 L 120 -80 L 120 100 L 0 200 L -120 100 L -120 -80 Z" 
+          fill="url(#shieldPurple)" opacity="0.08" stroke="url(#shieldPurple)" 
+          stroke-width="3" filter="url(#shieldMegaGlow)">
+      <animate attributeName="opacity" values="0.05;0.12;0.05" dur="4s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="scale" 
+        values="1;1.05;1" dur="4s" repeatCount="indefinite" additive="sum"/>
+    </path>
+    
+    <circle r="120" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.3">
+      <animate attributeName="r" values="120;130;120" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle r="90" fill="none" stroke="#A78BFA" stroke-width="2" opacity="0.5">
+      <animate attributeName="r" values="90;95;90" dur="2.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.7;0.4" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <circle r="60" fill="url(#shieldPurple)" opacity="0.7" filter="url(#shieldMegaGlow)">
+      <animate attributeName="r" values="60;65;60" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
   
-  <circle cx="400" cy="300" r="80" fill="none" stroke="#9945FF" stroke-width="2" opacity="0.4">
-    <animate attributeName="r" values="80;85;80" dur="3s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="3s" repeatCount="indefinite"/>
-  </circle>
-  
-  <circle cx="400" cy="300" r="60" fill="none" stroke="#14F195" stroke-width="2" opacity="0.6">
-    <animate attributeName="r" values="60;65;60" dur="2.5s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.5;0.8;0.5" dur="2.5s" repeatCount="indefinite"/>
-  </circle>
-  
-  <circle cx="400" cy="300" r="40" fill="url(#shieldGrad)" opacity="0.8">
-    <animate attributeName="r" values="40;42;40" dur="2s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="2s" repeatCount="indefinite"/>
-  </circle>
-  
-  <text x="400" y="560" font-family="monospace" font-size="24" fill="url(#shieldGrad)" text-anchor="middle" filter="url(#shieldGlow)">
+  <text x="450" y="630" font-family="monospace" font-size="28" font-weight="bold"
+        fill="url(#shieldPurple)" text-anchor="middle" filter="url(#shieldMegaGlow)">
     PROTECTION ACTIVE
-    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
   </text>
 </svg>

@@ -1,58 +1,78 @@
-<svg width="1200" height="400" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="500" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="solana" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#9945FF;stop-opacity:1" />
-      <stop offset="50%" style="stop-color:#14F195;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#00D4FF;stop-opacity:1" />
+    <linearGradient id="purple1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1">
+        <animate attributeName="stop-color" values="#8B5CF6;#A78BFA;#8B5CF6" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="50%" style="stop-color:#C084FC;stop-opacity:1">
+        <animate attributeName="stop-color" values="#C084FC;#DDD6FE;#C084FC" dur="4s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#9333EA;stop-opacity:1">
+        <animate attributeName="stop-color" values="#9333EA;#A855F7;#9333EA" dur="4s" repeatCount="indefinite"/>
+      </stop>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+    
+    <filter id="megaGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
       <feMerge>
+        <feMergeNode in="coloredBlur"/>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
+    
+    <radialGradient id="bgGrad">
+      <stop offset="0%" style="stop-color:#1a0033;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1"/>
+    </radialGradient>
   </defs>
   
-  <rect width="1200" height="400" fill="#000"/>
+  <rect width="1200" height="500" fill="url(#bgGrad)"/>
   
-  <text x="600" y="160" font-family="Arial, sans-serif" font-size="120" font-weight="900" 
-        fill="url(#solana)" text-anchor="middle" filter="url(#glow)">
-    ATHENA
-    <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
-  </text>
-  
-  <text x="600" y="230" font-family="Arial, sans-serif" font-size="28" 
-        fill="#ffffff" opacity="0.8" text-anchor="middle">
-    AI-POWERED ANTI-SNIPER AMM FOR SOLANA
-  </text>
-  
-  <g opacity="0.6">
-    <circle cx="150" cy="320" r="3" fill="#9945FF">
-      <animate attributeName="r" values="3;8;3" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+  <g opacity="0.15">
+    <circle cx="200" cy="100" r="150" fill="#8B5CF6">
+      <animate attributeName="r" values="150;180;150" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.2;0.1" dur="8s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="300" cy="300" r="3" fill="#14F195">
-      <animate attributeName="r" values="3;8;3" dur="2.5s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="900" cy="310" r="3" fill="#00D4FF">
-      <animate attributeName="r" values="3;8;3" dur="2.2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="1050" cy="330" r="3" fill="#9945FF">
-      <animate attributeName="r" values="3;8;3" dur="2.8s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.8s" repeatCount="indefinite"/>
+    <circle cx="1000" cy="400" r="200" fill="#9333EA">
+      <animate attributeName="r" values="200;230;200" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.1;0.2;0.1" dur="10s" repeatCount="indefinite"/>
     </circle>
   </g>
   
-  <line x1="150" y1="320" x2="300" y2="300" stroke="url(#solana)" stroke-width="1" opacity="0.3">
-    <animate attributeName="opacity" values="0.1;0.5;0.1" dur="3s" repeatCount="indefinite"/>
-  </line>
-  <line x1="300" y1="300" x2="900" y2="310" stroke="url(#solana)" stroke-width="1" opacity="0.3">
-    <animate attributeName="opacity" values="0.1;0.5;0.1" dur="3.5s" repeatCount="indefinite"/>
-  </line>
-  <line x1="900" y1="310" x2="1050" y2="330" stroke="url(#solana)" stroke-width="1" opacity="0.3">
-    <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.8s" repeatCount="indefinite"/>
-  </line>
+  <text x="600" y="220" font-family="Arial, sans-serif" font-size="140" font-weight="900" 
+        fill="url(#purple1)" text-anchor="middle" filter="url(#megaGlow)">
+    ATHENA
+    <animateTransform attributeName="transform" type="scale" 
+      values="1;1.02;1" dur="3s" repeatCount="indefinite" additive="sum"/>
+  </text>
+  
+  <text x="600" y="290" font-family="Arial, sans-serif" font-size="32" 
+        fill="#C084FC" opacity="0.9" text-anchor="middle" letter-spacing="4">
+    AI ANTI-SNIPER PROTOCOL
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite"/>
+  </text>
+  
+  <g transform="translate(600, 380)">
+    <path d="M -80 0 L -40 0" stroke="#8B5CF6" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="-60" cy="0" r="4" fill="#8B5CF6">
+      <animate attributeName="r" values="3;6;3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <path d="M -20 0 L 20 0" stroke="#A78BFA" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="0" cy="0" r="4" fill="#A78BFA">
+      <animate attributeName="r" values="3;6;3" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <path d="M 40 0 L 80 0" stroke="#9333EA" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="60" cy="0" r="4" fill="#9333EA">
+      <animate attributeName="r" values="3;6;3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
 </svg>
