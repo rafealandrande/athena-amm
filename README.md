@@ -4,6 +4,8 @@
 
 AI-powered anti-sniper market maker for Solana. Protects traders from bot exploitation during token launches.
 
+<img src="./assets/athena.jpg" width="400" alt="Athena"/>
+
 ![Stats](./assets/stats.svg)
 
 </div>
