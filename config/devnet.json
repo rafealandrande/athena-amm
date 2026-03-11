@@ -1,0 +1,13 @@
+{
+  "network": "devnet",
+  "rpc_url": "https://api.devnet.solana.com",
+  "program_id": "Athena11111111111111111111111111111111111",
+  "ai_model": {
+    "threshold": 0.7,
+    "update_interval": 3600
+  },
+  "monitoring": {
+    "enabled": true,
+    "log_level": "info"
+  }
+}

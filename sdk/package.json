@@ -1,0 +1,15 @@
+{
+  "name": "athena-sdk",
+  "version": "1.0.0",
+  "description": "SDK for interacting with Athena AMM",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.87.0",
+    "@project-serum/anchor": "^0.29.0"
+  }
+}
